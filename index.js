@@ -7,6 +7,8 @@ const {postsRouter}=require("./routes/posts.routes");
 const {auth}=require("./middleware/auth");
 app.use(cors());
 app.use(express.json());
+
+
 require("dotenv").config();
 
 app.use("/users",usersRouter);
