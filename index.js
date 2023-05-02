@@ -11,28 +11,28 @@ app.use(express.json());
 
 
 require("dotenv").config();
-
+const connectDB = async () => {
+    try {
+       await connection;
+   
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  }
 app.use("/users",usersRouter);
 app.use(auth);
 app.use("/posts",postsRouter);
 
-// const connectDB = async () => {
-//     try {
-//        await connection;
-   
-//     } catch (error) {
-//       console.log(error);
-//       process.exit(1);
-//     }
-//   }
-app.listen(port,async()=>{
-        await connection;
-        console.log("server is up")
+
+// app.listen(port,async()=>{
+//         await connection;
+//         console.log("server is up")
     
     
-})
-// connectDB().then(() => {
-//     app.listen(process.env.PORT, () => {
-//         console.log("listening for requests");
-//     })
 // })
+connectDB().then(() => {
+    app.listen(process.env.PORT, () => {
+        console.log("listening for requests");
+    })
+})
