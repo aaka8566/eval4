@@ -26,13 +26,10 @@ app.use("/posts",postsRouter);
 //     }
 //   }
 app.listen(port,async()=>{
-    try{
         await connection;
         console.log("server is up")
-    }
-    catch(er){
-        console.log(err);
-    }
+    
+    
 })
 // connectDB().then(() => {
 //     app.listen(process.env.PORT, () => {
