@@ -15,13 +15,26 @@ app.use("/users",usersRouter);
 app.use(auth);
 app.use("/posts",postsRouter);
 
-
-app.listen(process.env.PORT,async()=>{
-    try{
-        await connection;
-        console.log("server is up")
+const connectDB = async () => {
+    try {
+       await connection;
+   
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
     }
-    catch(er){
-        console.log(err);
-    }
+  }
+// app.listen(process.env.PORT,async()=>{
+//     try{
+//         await connection;
+//         console.log("server is up")
+//     }
+//     catch(er){
+//         console.log(err);
+//     }
+// })
+connectDB().then(() => {
+    app.listen(process.env.PORT, () => {
+        console.log("listening for requests");
+    })
 })
