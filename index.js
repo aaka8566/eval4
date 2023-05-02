@@ -5,6 +5,7 @@ const cors=require("cors");
 const {usersRouter}=require("./routes/users.routes");
 const {postsRouter}=require("./routes/posts.routes");
 const {auth}=require("./middleware/auth");
+const port=process.env.PORT||3000;
 app.use(cors());
 app.use(express.json());
 
@@ -15,26 +16,26 @@ app.use("/users",usersRouter);
 app.use(auth);
 app.use("/posts",postsRouter);
 
-const connectDB = async () => {
-    try {
-       await connection;
+// const connectDB = async () => {
+//     try {
+//        await connection;
    
-    } catch (error) {
-      console.log(error);
-      process.exit(1);
+//     } catch (error) {
+//       console.log(error);
+//       process.exit(1);
+//     }
+//   }
+app.listen(port,async()=>{
+    try{
+        await connection;
+        console.log("server is up")
     }
-  }
-// app.listen(process.env.PORT,async()=>{
-//     try{
-//         await connection;
-//         console.log("server is up")
-//     }
-//     catch(er){
-//         console.log(err);
-//     }
-// })
-connectDB().then(() => {
-    app.listen(process.env.PORT, () => {
-        console.log("listening for requests");
-    })
+    catch(er){
+        console.log(err);
+    }
 })
+// connectDB().then(() => {
+//     app.listen(process.env.PORT, () => {
+//         console.log("listening for requests");
+//     })
+// })
